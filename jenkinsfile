@@ -14,13 +14,16 @@ pipeline{
                 sh 'mvn test'
             }
         }
-        // stage('Run JAR'){
-        //     steps{
-        //         script {
-        //             //Run the jar file and capture the output
-        //             def output = sh(script: 'java -jar target/simple-java-project-1.0-SNAPSHOT.jar',)
-        //         }
-        //     }
-        // }
+        stage('Run JAR'){
+            steps{
+                script {
+                    //Run the jar file and capture the output
+                    def output = sh(script: 'java -jar target/simple-java-project-1.0-SNAPSHOT.jar', returnStandout: true).trim()
+
+                    //print the output to Jnekins console
+                    echo "Output from JAR: ${output}"
+                }
+            }
+        }
     }
 }
